@@ -23,9 +23,12 @@
     pciutils
     usbutils
 
+    screenfetch
     code-cursor
-
-    shotman
+    grim
+    wl-clipboard
+    direnv
+    nix-direnv
   ];
 
   services.flatpak.packages = [

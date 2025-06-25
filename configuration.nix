@@ -109,6 +109,7 @@
       plugins = [
         "git"
         "z"
+	"direnv"
       ];
       theme = "robbyrussell";
     };

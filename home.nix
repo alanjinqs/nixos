@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, system, services, ... }:
 
 {
+  #imports = [ inputs.flatpaks.homeManagerModules.nix-flatpak ];
+
   home.username = "alan";
   home.homeDirectory = "/home/alan";
 
@@ -20,6 +22,12 @@
     ethtool
     pciutils
     usbutils
+
+    code-cursor
+  ];
+
+  services.flatpak.packages = [
+    "app.zen_browser.zen"
   ];
 
   programs.git = {

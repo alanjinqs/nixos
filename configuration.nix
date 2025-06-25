@@ -27,6 +27,19 @@
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+    nerd-fonts.jetbrains-mono
+  ];
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -40,6 +53,15 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
+  };
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+        fcitx5-rime
+        fcitx5-chinese-addons
+        librime
+    ];
   };
 
   # Enable flatpak
@@ -79,8 +101,19 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "z"
+      ];
+      theme = "robbyrussell";
+    };
+  };
+ 
   users.users.alan = {
     isNormalUser = true;
     description = "alan";
@@ -88,16 +121,28 @@
     packages = with pkgs; [
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -105,7 +150,33 @@
     wget
     neovim
     git
+    
+    waybar
+    kitty
+    mako
+    libnotify
+    swww
+    rofi-wayland
+    pavucontrol
   ];
+
+  
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Certain features, including CLI integration and system authentication support,
+    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
+    polkitPolicyOwners = [ "alan" ];
+  };
+
+  environment.etc = {
+    "1password/custom_allowed_browsers" = {
+        text = ''
+          .zen-wrapped
+        '';
+        mode = "0755";
+      };
+    };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -24,6 +24,8 @@
     usbutils
 
     code-cursor
+
+    shotman
   ];
 
   services.flatpak.packages = [
@@ -55,7 +57,6 @@
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
     '';
-
     shellAliases = {
       vim = "nvim";
     };

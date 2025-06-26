@@ -17,6 +17,8 @@
     eza # A modern replacement for ‘ls’
     lm_sensors
 
+    chromium
+
     which
     nix-output-monitor
     lsof

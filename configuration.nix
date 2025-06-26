@@ -38,8 +38,14 @@
     dina-font
     proggyfonts
     nerd-fonts.jetbrains-mono
+    noto-fonts-cjk-sans
   ];
 
+  fonts.fontconfig = {
+    defaultFonts = {
+      sansSerif = [ "Ubuntu" "Noto Sans CJK SC" ];
+    };
+  };
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -78,7 +84,9 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = false;
+  services.displayManager.ly.enable = true;
+
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11

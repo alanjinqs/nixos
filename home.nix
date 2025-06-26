@@ -15,6 +15,7 @@
     p7zip
 
     eza # A modern replacement for ‘ls’
+    lm_sensors
 
     which
     nix-output-monitor
@@ -35,7 +36,7 @@
     "app.zen_browser.zen"
   ];
 
-  programs.git = {
+   programs.git = {
     enable = true;
     userName = "Alan";
     userEmail = "dev@alanj.in";

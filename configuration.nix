@@ -64,6 +64,13 @@
     ];
   };
 
+#  services.synergy.client = {
+#    enable = true;
+#    serverAddress = "192.168.8.150";
+#  };
+
+
+
   # Enable flatpak
   services.flatpak.enable = true;
 

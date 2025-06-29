@@ -32,10 +32,13 @@
     wl-clipboard
     direnv
     nix-direnv
+
+    thunderbird
+    kanshi
   ];
 
   services.flatpak.packages = [
-    "app.zen_browser.zen"
+#    "app.zen_browser.zen"
   ];
 
    programs.git = {
